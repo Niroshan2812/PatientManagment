@@ -9,11 +9,11 @@ spring:
         webflux:
           routes:
             - id: auth-service-route
-            - uri: http://auth-service:4005
-            - predicates:
-            - Path=/auth/**
-            - filters:
-            - StripPrefix=1
+              uri: http://auth-service:4005
+              predicates:
+              - Path=/auth/**
+              filters:
+              - StripPrefix=1
 
 
             # 1. Route for the Patient Service
@@ -23,6 +23,7 @@ spring:
                 - Path=/api/patients/**, /api/patients
               filters:
                 - StripPrefix=1
+                - JwtValidation
 
             # 2. Route for the OpenAPI Docs
             - id: api-docs-patient-route
